@@ -1291,6 +1291,7 @@
         const valentineChoice = document.getElementById('valentineChoice');
         const valentineSuccess = document.getElementById('valentineSuccess');
         const noBtn = document.getElementById('noBtn');
+        let noBtnHoverCount = 0;
 
         // Show Valentine choice after a short delay
         setTimeout(() => {
@@ -1299,13 +1300,68 @@
 
         // Move the No button when mouse approaches
         noBtn.addEventListener('mouseover', () => {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtnHoverCount++;
 
-            // Ensure the button stays within viewport
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = Math.min(Math.max(0, x), window.innerWidth - noBtn.offsetWidth) + 'px';
-            noBtn.style.top = Math.min(Math.max(0, y), window.innerHeight - noBtn.offsetHeight) + 'px';
+            // 获取视口尺寸和按钮尺寸
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+
+            // 计算500px正方形区域的位置（居中）
+            const containerWidth = 500;
+            const containerHeight = 500;
+            const containerLeft = (viewportWidth - containerWidth) / 2;
+            const containerTop = (viewportHeight - containerHeight) / 2;
+
+            // 在第10次移动时显示消息
+            if (noBtnHoverCount === 10) {
+                const messageDiv = document.createElement('div');
+                messageDiv.id = 'noButtonMessage';
+                messageDiv.style.position = 'fixed';
+                messageDiv.style.padding = '10px 15px';
+                messageDiv.style.background = 'rgba(255, 255, 255, 0.9)';
+                messageDiv.style.border = '1px solid var(--primary-color)';
+                messageDiv.style.borderRadius = '8px';
+                messageDiv.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                messageDiv.style.zIndex = '1001';
+                messageDiv.style.fontSize = '14px';
+                messageDiv.style.color = 'var(--primary-color)';
+                messageDiv.textContent = '真的这么坚定嘛，那我马上就站住不跑了';
+                document.body.appendChild(messageDiv);
+
+                // 将消息定位在按钮旁边
+                const btnRect = noBtn.getBoundingClientRect();
+                messageDiv.style.left = `${btnRect.right + 10}px`;
+                messageDiv.style.top = `${btnRect.top}px`;
+
+                // 3秒后移除消息
+                setTimeout(() => {
+                    messageDiv.remove();
+                }, 3000);
+            }
+
+            if (noBtnHoverCount <= 15) {
+                // 获取当前按钮位置
+                const currentX = noBtn.offsetLeft;
+                const currentY = noBtn.offsetTop;
+
+                // 生成新位置，确保与当前位置的距离至少为100px
+                let newX, newY, distance;
+                do {
+                    newX = Math.random() * (containerWidth - btnWidth) + containerLeft;
+                    newY = Math.random() * (containerHeight - btnHeight) + containerTop;
+                    distance = Math.sqrt(Math.pow(newX - currentX, 2) + Math.pow(newY - currentY, 2));
+                } while (distance < 100);
+
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = `${newX}px`;
+                noBtn.style.top = `${newY}px`;
+                noBtn.style.transition = 'all 0.3s ease';
+            } else {
+                // 超过15次后，移除按钮
+                noBtn.style.display = 'none';
+            }
         });
 
         function acceptValentine() {
