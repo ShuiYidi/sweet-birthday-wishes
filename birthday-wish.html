@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日快乐，亲爱的</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 动态背景效果 */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #ffd1d1, #ffb6b6, #ff9e9e, #ff8585);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
+                url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* 添加浮动爱心背景 */
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 107, 107, 0.3);
+            animation: floatHeart 6s linear infinite;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* 画廊样式 */
+        .gallery-section {
+            padding: 80px 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            padding: 20px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.3s;
+        }
+
+        .wish-section {
+            padding: 80px 20px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .wish-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .wish-text {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .surprise-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.6s;
+        }
+
+        .surprise-btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .footer {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: rgba(248, 249, 250, 0.9);
+        }
+
+        .footer p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hidden-content {
+            display: none;
+            padding: 40px 20px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hidden-content.show {
+            display: block;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .wish-text {
+                font-size: 1rem;
+            }
+        }
+
+        /* 音频控制按钮样式 */
+        .audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: rgba(255, 107, 107, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .audio-control:hover {
+            background-color: rgba(255, 107, 107, 1);
+            transform: scale(1.1);
+        }
+
+        /* 对话框样式 */
+        .dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .dialog-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 80%;
+            width: 400px;
+        }
+
+        .dialog-buttons {
+            margin-top: 20px;
+        }
+
+        .dialog-button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dialog-button.primary {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        .dialog-button.secondary {
+            background-color: #666;
+            color: white;
+        }
+
+        .dialog-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-animation"></div>
+
+    <!-- 音频元素 -->
+    <audio id="bgMusic" loop>
+        <source src="assets/bgm.mp3" type="audio/mp3">
+        您的浏览器不支持音频元素。
+    </audio>
+
+    <!-- 音频控制按钮 -->
+    <button class="audio-control" id="audioControl" style="display: none;">
+        <span id="audioIcon">🔊</span>
+    </button>
+
+    <!-- 音频提示对话框 -->
+    <div class="dialog-overlay" id="audioDialog">
+        <div class="dialog-box">
+            <h3>背景音乐提示</h3>
+            <p>这个网页包含背景音乐，您想要开启声音吗？</p>
+            <div class="dialog-buttons">
+                <button class="dialog-button primary" id="enableAudio">开启声音</button>
+                <button class="dialog-button secondary" id="disableAudio">静音播放</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="floating-hearts" id="floatingHearts"></div>
+        <div class="hero-content">
+            <h1>生日快乐，亲爱的</h1>
+            <p>愿你的生日充满温暖与惊喜</p>
+        </div>
+    </section>
+
+    <section class="wish-section">
+        <div class="wish-content">
+            <p class="wish-text">
+                亲爱的，<br>
+                在这个特别的日子里，我想对你说：<br>
+                感谢你让我的生活变得如此美好。<br>
+                你的笑容是我最珍贵的礼物，<br>
+                你的存在让我的世界充满色彩。
+            </p>
+            <a href="#" class="surprise-btn" id="surpriseBtn">点击获取惊喜</a>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="温馨时刻">
+                <div class="gallery-overlay">
+                    <h3>我们的回忆</h3>
+                    <p>每一个瞬间都值得珍藏</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="甜蜜时光">
+                <div class="gallery-overlay">
+                    <h3>甜蜜时光</h3>
+                    <p>与你在一起的每一天都是礼物</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="美好回忆">
+                <div class="gallery-overlay">
+                    <h3>美好回忆</h3>
+                    <p>让我们的故事继续书写</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hidden-content" id="hiddenContent">
+        <div class="wish-content">
+            <p class="wish-text">
+                亲爱的，<br>
+                这是我为你准备的特别礼物。<br>
+                希望它能带给你一丝惊喜和温暖。<br>
+                永远爱你 ❤️
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>永远爱你的人</p>
+        <p>2024年</p>
+    </footer>
+
+    <script>
+        // 音频相关变量
+        const bgMusic = document.getElementById('bgMusic');
+        const audioControl = document.getElementById('audioControl');
+        const audioDialog = document.getElementById('audioDialog');
+        const audioIcon = document.getElementById('audioIcon');
+        let isMuted = false;
+
+        // 音频控制函数
+        function toggleAudio() {
+            if (isMuted) {
+                bgMusic.muted = false;
+                audioIcon.textContent = '🔊';
+                isMuted = false;
+            } else {
+                bgMusic.muted = true;
+                audioIcon.textContent = '🔇';
+                isMuted = true;
+            }
+        }
+
+        // 音频控制按钮点击事件
+        audioControl.addEventListener('click', toggleAudio);
+
+        // 处理用户选择
+        document.getElementById('enableAudio').addEventListener('click', () => {
+            audioDialog.style.display = 'none';
+            audioControl.style.display = 'flex';
+            bgMusic.play();
+            isMuted = false;
+        });
+
+        document.getElementById('disableAudio').addEventListener('click', () => {
+            audioDialog.style.display = 'none';
+            audioControl.style.display = 'flex';
+            bgMusic.play();
+            bgMusic.muted = true;
+            audioIcon.textContent = '🔇';
+            isMuted = true;
+        });
+
+        // 创建浮动爱心
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + '%';
+            container.appendChild(heart);
+
+            // 动画结束后移除爱心
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+            });
+        }
+
+        // 定期创建新的爱心
+        setInterval(createFloatingHearts, 300);
+
+        // 惊喜按钮点击事件
+        document.getElementById('surpriseBtn').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('hiddenContent').classList.add('show');
+            this.style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>

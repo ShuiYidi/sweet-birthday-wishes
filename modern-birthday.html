@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To My Love | Birthday Celebration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #ffd1d1;
+            --text-color: #2c3e50;
+            --background-color: #fff;
+            --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            position: relative;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s var(--transition-timing);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: all 0.3s var(--transition-timing);
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 80%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color);
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        /* Hero Section with parallax effect */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #fff 100%);
+            padding-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover;
+            opacity: 0.1;
+            transform: scale(1.1);
+            animation: parallax 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes parallax {
+            from {
+                transform: scale(1.1) translateY(0);
+            }
+
+            to {
+                transform: scale(1.1) translateY(-30px);
+            }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ff9a9e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s var(--transition-timing) forwards;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s var(--transition-timing) 0.3s forwards;
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Gallery Section with enhanced animations */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            aspect-ratio: 3/4;
+            cursor: pointer;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.6s var(--transition-timing);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.3s var(--transition-timing);
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--transition-timing);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            color: white;
+            z-index: 2;
+            transform: translateY(100%);
+            transition: transform 0.3s var(--transition-timing);
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Message Section */
+        .message {
+            background-color: #fafafa;
+        }
+
+        .message-content {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .message-text {
+            font-size: 1.8rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .message-text.show {
+            animation: fadeInUp 1s var(--transition-timing) forwards;
+        }
+
+        /* Audio Player */
+        .audio-player {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .vinyl-container {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            margin: 20px auto;
+            perspective: 1000px;
+        }
+
+        .vinyl-disc {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #222, #444);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: rotate 20s linear infinite paused;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .vinyl-disc.playing {
+            animation-play-state: running;
+        }
+
+        .vinyl-disc::before {
+            content: '';
+            position: absolute;
+            width: 40%;
+            height: 40%;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 8px solid #222;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .vinyl-disc::after {
+            content: '';
+            position: absolute;
+            width: 15%;
+            height: 15%;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .control-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s var(--transition-timing);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary-color);
+        }
+
+        .control-btn.mute {
+            background: #666;
+        }
+
+        .control-btn.mute:hover {
+            background: #555;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .message-text {
+                font-size: 1.4rem;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        /* Additional Sections and Animations */
+        .memory-timeline {
+            position: relative;
+            padding: 50px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s var(--transition-timing);
+        }
+
+        .timeline-item.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+            transform: translateX(50px);
+        }
+
+        .timeline-date {
+            min-width: 150px;
+            padding: 10px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Floating Hearts Animation */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: var(--primary-color);
+            opacity: 0.3;
+            animation: floatHeart 6s linear infinite;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Memory Game */
+        .memory-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .memory-card {
+            position: relative;
+            height: 100px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transform: scale(1);
+            transition: transform 0.3s;
+        }
+
+        .memory-card:active {
+            transform: scale(0.95);
+        }
+
+        .memory-card.flip {
+            transform: rotateY(180deg);
+        }
+
+        .memory-card-front,
+        .memory-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            background: #fff;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .memory-card-front {
+            transform: rotateY(180deg);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .memory-card-back {
+            background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+            border: 2px solid var(--primary-color);
+        }
+
+        /* Quote Section */
+        .quote-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #fff 100%);
+        }
+
+        .quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .quote.show {
+            animation: fadeInUp 1s var(--transition-timing) forwards;
+        }
+
+        /* Interactive Elements */
+        .wish-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s var(--transition-timing);
+            margin-top: 20px;
+        }
+
+        .wish-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-color);
+            opacity: 0;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">首页</a>
+                <a href="#gallery" class="nav-link">照片墙</a>
+                <a href="#message" class="nav-link">爱的留言</a>
+                <a href="#music" class="nav-link">专属音乐</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Happy Birthday</h1>
+            <p>亲爱的，人间爱情就像一朵花</p>
+            <button class="wish-button" id="wishButton">点击许愿</button>
+        </div>
+    </section>
+
+    <section id="quote" class="section quote-section">
+        <div class="section-content">
+            <p class="quote">
+                "遇见你是我生命中最美好的意外，<br>
+                每一个有你的日子都值得被铭记。"
+            </p>
+        </div>
+    </section>
+
+    <section id="timeline" class="section memory-timeline">
+        <div class="section-content">
+            <div class="timeline-item">
+                <div class="timeline-date">2023年12月</div>
+                <div class="timeline-content">
+                    <h3>第一次相遇</h3>
+                    <p>在那个温暖的冬日午后，我们相遇了。阳光温柔，你的笑容更甜。</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2024年1月</div>
+                <div class="timeline-content">
+                    <h3>第一次约会</h3>
+                    <p>漫步在城市的街道上，牵着你的手，感受着幸福的温度。</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2024年2月</div>
+                <div class="timeline-content">
+                    <h3>第一次旅行</h3>
+                    <p>一起看海，看日出，看星星，每个瞬间都是最美的回忆。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="section">
+        <div class="section-content">
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="美好时光">
+                    <div class="gallery-caption">
+                        <h3>美好时光</h3>
+                        <p>每一刻都值得珍藏</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1522673149090-6b5c58f89afd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="甜蜜瞬间">
+                    <div class="gallery-caption">
+                        <h3>甜蜜瞬间</h3>
+                        <p>与你在一起的每一天</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1507090960745-b32f65d3113a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="幸福回忆">
+                    <div class="gallery-caption">
+                        <h3>幸福回忆</h3>
+                        <p>记录我们的点点滴滴</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="温馨时刻">
+                    <div class="gallery-caption">
+                        <h3>温馨时刻</h3>
+                        <p>生活中的小确幸</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="浪漫约会">
+                    <div class="gallery-caption">
+                        <h3>浪漫约会</h3>
+                        <p>每次相遇都是惊喜</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1516589091380-5d8e21be2dce?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="快乐日常">
+                    <div class="gallery-caption">
+                        <h3>快乐日常</h3>
+                        <p>平凡中的幸福</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="message" class="section message">
+        <div class="section-content message-content">
+            <p class="message-text">
+                亲爱的，<br>
+                在这个特别的日子里，<br>
+                愿你的每一天都如阳光般温暖，<br>
+                如花儿般绚烂。<br>
+                感谢你让我的生命如此美好，<br>
+                生日快乐！
+            </p>
+        </div>
+    </section>
+
+    <section id="music" class="section">
+        <div class="section-content">
+            <div class="audio-player">
+                <div class="vinyl-container">
+                    <div class="vinyl-disc" id="vinylDisc"></div>
+                </div>
+                <audio id="bgMusic" autoplay loop>
+                    <source src="assets/bgm.mp3" type="audio/mp3">
+                </audio>
+                <div class="audio-controls">
+                    <button class="control-btn" id="playBtn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="control-btn" id="muteBtn">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="game" class="section">
+        <div class="section-content">
+            <h2 style="text-align: center; margin-bottom: 30px;">记忆游戏</h2>
+            <div class="memory-game" id="memoryGame">
+                <!-- Memory cards will be added by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.gallery-item, .message-text').forEach(item => {
+            observer.observe(item);
+        });
+
+        // 音频控制
+        const audio = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playBtn');
+        const muteBtn = document.getElementById('muteBtn');
+        const vinylDisc = document.getElementById('vinylDisc');
+        let isPlaying = false;
+        let isMuted = false;
+        let fadeInterval;
+
+        // 音量淡入淡出函数
+        function fadeAudio(start, end, duration) {
+            const interval = 50; // 每50毫秒调整一次音量
+            const steps = duration / interval;
+            const stepSize = (end - start) / steps;
+            let currentStep = 0;
+
+            // 清除之前的淡入淡出
+            clearInterval(fadeInterval);
+
+            fadeInterval = setInterval(() => {
+                currentStep++;
+                const currentVolume = start + (stepSize * currentStep);
+                audio.volume = Math.max(0, Math.min(1, currentVolume));
+
+                if (currentStep >= steps) {
+                    clearInterval(fadeInterval);
+                    if (end === 0) {
+                        audio.pause();
+                        vinylDisc.classList.remove('playing');
+                    }
+                }
+            }, interval);
+        }
+
+        // 自动播放处理
+        audio.addEventListener('canplaythrough', () => {
+            // 初始化音量为0
+            audio.volume = 0;
+
+            // 尝试自动播放
+            const playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isPlaying = true;
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    vinylDisc.classList.add('playing');
+                    // 自动播放成功后淡入
+                    fadeAudio(0, 1, 2000);
+                }).catch(error => {
+                    // 自动播放被阻止
+                    console.log("Autoplay prevented");
+                });
+            }
+        });
+
+        // 播放/暂停控制
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                // 淡出后暂停
+                fadeAudio(audio.volume, 0, 1000);
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                audio.play();
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                vinylDisc.classList.add('playing');
+                // 播放时淡入
+                fadeAudio(0, 1, 1000);
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // 静音控制
+        muteBtn.addEventListener('click', () => {
+            if (isMuted) {
+                // 取消静音时淡入
+                fadeAudio(0, 1, 1000);
+                muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                muteBtn.classList.remove('mute');
+                // 确保音频在播放状态
+                if (isPlaying) {
+                    audio.play();
+                    vinylDisc.classList.add('playing');
+                }
+            } else {
+                // 静音时淡出
+                fadeAudio(audio.volume, 0, 1000);
+                muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                muteBtn.classList.add('mute');
+            }
+            isMuted = !isMuted;
+        });
+
+        // 监听音频播放状态
+        audio.addEventListener('play', () => {
+            if (!isMuted && audio.volume === 0) {
+                fadeAudio(0, 1, 1000);
+            }
+            vinylDisc.classList.add('playing');
+        });
+
+        audio.addEventListener('pause', () => {
+            vinylDisc.classList.remove('playing');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 导航栏活动状态
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // 创建浮动爱心
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            document.getElementById('floatingHearts').appendChild(heart);
+
+            heart.addEventListener('animationend', () => heart.remove());
+        }
+
+        setInterval(createHeart, 300);
+
+        // 记忆游戏
+        const memoryGame = document.getElementById('memoryGame');
+        const emojis = ['❤️', '🎂', '🎁', '🎈', '🌹', '🌟', '🎵', '🍰'];
+        const gameEmojis = [...emojis, ...emojis];
+        let hasFlippedCard = false;
+        let lockBoard = false;
+        let firstCard, secondCard;
+
+        // 创建记忆游戏卡片
+        gameEmojis.sort(() => Math.random() - 0.5).forEach(emoji => {
+            const card = document.createElement('div');
+            card.className = 'memory-card';
+            card.innerHTML = `
+                <div class="memory-card-front">${emoji}</div>
+                <div class="memory-card-back">?</div>
+            `;
+            card.addEventListener('click', flipCard);
+            memoryGame.appendChild(card);
+        });
+
+        function flipCard() {
+            if (lockBoard) return;
+            if (this === firstCard) return;
+
+            this.classList.add('flip');
+
+            if (!hasFlippedCard) {
+                hasFlippedCard = true;
+                firstCard = this;
+                return;
+            }
+
+            secondCard = this;
+            checkForMatch();
+        }
+
+        function checkForMatch() {
+            const isMatch = firstCard.querySelector('.memory-card-front').textContent ===
+                secondCard.querySelector('.memory-card-front').textContent;
+
+            isMatch ? disableCards() : unflipCards();
+        }
+
+        function disableCards() {
+            firstCard.removeEventListener('click', flipCard);
+            secondCard.removeEventListener('click', flipCard);
+            resetBoard();
+        }
+
+        function unflipCards() {
+            lockBoard = true;
+            setTimeout(() => {
+                firstCard.classList.remove('flip');
+                secondCard.classList.remove('flip');
+                resetBoard();
+            }, 1000);
+        }
+
+        function resetBoard() {
+            [hasFlippedCard, lockBoard] = [false, false];
+            [firstCard, secondCard] = [null, null];
+        }
+
+        // 许愿按钮效果
+        const wishButton = document.getElementById('wishButton');
+        wishButton.addEventListener('click', () => {
+            createConfetti();
+            alert('生日愿望已经发送到天空啦！');
+        });
+
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                confetti.style.animation = `confetti-fall ${Math.random() * 3 + 2}s linear`;
+                document.body.appendChild(confetti);
+
+                confetti.addEventListener('animationend', () => confetti.remove());
+            }
+        }
+
+        // 监听所有需要动画的元素
+        document.querySelectorAll('.timeline-item, .quote').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+</body>
+
+</html>
