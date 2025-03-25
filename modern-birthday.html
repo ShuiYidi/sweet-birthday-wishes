@@ -1073,16 +1073,24 @@
                         console.log("Playback failed:", error);
                         isPlaying = false;
                         playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                        // 当自动播放失败时，我们需要确保后续的用户交互能够触发播放
+                        hasInteracted = false;
                     });
                 }
             }
         }
 
-        // 添加各种用户交互事件监听
+        // 只添加真正的用户交互事件监听，不包括滚动
         document.addEventListener('click', startAudioPlayback, { once: true });
         document.addEventListener('touchstart', startAudioPlayback, { once: true });
-        document.addEventListener('scroll', startAudioPlayback, { once: true });
         document.addEventListener('keydown', startAudioPlayback, { once: true });
+
+        // 添加一个备用的处理程序，确保在任何用户交互后可以播放音频
+        document.body.addEventListener('click', function () {
+            if (!hasInteracted) {
+                startAudioPlayback();
+            }
+        });
 
         // 播放/暂停控制
         playBtn.addEventListener('click', () => {
@@ -1361,7 +1369,7 @@
                     newY = Math.random() * (containerHeight - btnHeight) + containerTop;
                     distance = Math.sqrt(Math.pow(newX - currentX, 2) + Math.pow(newY - currentY, 2));
                     attempts++;
-                } while (distance < 150 && attempts < maxAttempts);
+                } while (distance < 200 && attempts < maxAttempts);
 
                 // 如果找不到合适的位置，就选择最远的位置
                 if (attempts >= maxAttempts) {
