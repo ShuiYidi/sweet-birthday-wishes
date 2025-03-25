@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Dancing+Script:wght@500;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --primary-color: #ff6b6b;
@@ -824,6 +825,38 @@
                 transform: scale(1.1);
             }
         }
+
+        /* 添加统一的标题样式 */
+        .map-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.6rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            font-family: 'Ma Shan Zheng', 'Dancing Script', cursive;
+            text-shadow: 1px 1px 1px rgba(255, 107, 107, 0.2);
+        }
+
+        .map-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+        }
+
+        /* 确保标题容器居中显示 */
+        .title-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
     </style>
 </head>
 
@@ -851,6 +884,9 @@
 
     <section id="quote" class="section quote-section">
         <div class="section-content">
+            <div class="title-container">
+                <h2 class="map-title">爱的箴言</h2>
+            </div>
             <p class="quote">
                 "遇见你是我生命中最美好的意外，<br>
                 每一个有你的日子都值得被铭记。"
@@ -860,6 +896,9 @@
 
     <section id="timeline" class="section memory-timeline">
         <div class="section-content">
+            <div class="title-container">
+                <h2 class="map-title">我们的时光</h2>
+            </div>
             <div class="timeline-item">
                 <div class="timeline-date">2023年12月</div>
                 <div class="timeline-content">
@@ -886,6 +925,9 @@
 
     <section id="gallery" class="section">
         <div class="section-content">
+            <div class="title-container">
+                <h2 class="map-title">照片墙</h2>
+            </div>
             <div class="gallery">
                 <div class="gallery-item">
                     <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
@@ -941,6 +983,9 @@
 
     <section id="message" class="section message">
         <div class="section-content message-content">
+            <div class="title-container">
+                <h2 class="map-title">爱的留言</h2>
+            </div>
             <p class="message-text">
                 亲爱的，<br>
                 在这个特别的日子里，<br>
@@ -954,6 +999,9 @@
 
     <section id="music" class="section">
         <div class="section-content">
+            <div class="title-container">
+                <h2 class="map-title">专属音乐</h2>
+            </div>
             <div class="audio-player">
                 <div class="vinyl-container">
                     <div class="vinyl-disc" id="vinylDisc"></div>
@@ -975,9 +1023,23 @@
 
     <section id="game" class="section">
         <div class="section-content">
-            <h2 style="text-align: center; margin-bottom: 30px;">记忆游戏</h2>
+            <div class="title-container">
+                <h2 class="map-title">记忆游戏</h2>
+            </div>
             <div class="memory-game" id="memoryGame">
                 <!-- Memory cards will be added by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="cities" class="section">
+        <div class="section-content">
+            <div class="title-container">
+                <h2 class="map-title">我们的足迹</h2>
+            </div>
+            <div class="map-container">
+                <div id="chinaMap"></div>
+                <div id="cityInfo" class="city-info"></div>
             </div>
         </div>
     </section>
