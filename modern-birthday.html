@@ -1130,7 +1130,7 @@
                         isPlaying = true;
                         playBtn.innerHTML = '<i class="fas fa-pause"></i>';
                         vinylDisc.classList.add('playing');
-                        fadeAudio(0, 1, 2000);
+                        fadeAudio(0, 1.0, 2000);
                     }).catch(error => {
                         console.log("Playback failed:", error);
                         isPlaying = false;
@@ -1165,7 +1165,7 @@
                 playBtn.innerHTML = '<i class="fas fa-pause"></i>';
                 vinylDisc.classList.add('playing');
                 // 播放时淡入
-                fadeAudio(0, 1, 1000);
+                fadeAudio(0, 1.0, 1000);
             }
             isPlaying = !isPlaying;
         });
